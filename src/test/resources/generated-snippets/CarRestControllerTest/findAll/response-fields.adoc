@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`[].id`
+|`Number`
+|The car's id
+
+|`[].model`
+|`String`
+|The car's model
+
+|===

@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/api/people' -i -X POST -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept: application/json;charset=UTF-8' -H 'Authorization: Bearer 123456' -d '{
+    "name": "Sam",
+    "age": 20
+}
+'
+----

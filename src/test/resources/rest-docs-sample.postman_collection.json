@@ -1,0 +1,213 @@
+{
+	"variables": [],
+	"info": {
+		"name": "rest-docs-sample",
+		"_postman_id": "024735d8-3505-b53f-059b-405abeabba24",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"description": "",
+			"item": [
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/api/people/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/api/people",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"url": "http://localhost:8080/api/people",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"url": "http://localhost:8080/api/people/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "patchById",
+					"request": {
+						"url": "http://localhost:8080/api/people/1",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"url": "http://localhost:8080/api/people/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Car",
+			"description": "",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/api/cars",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 123456",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

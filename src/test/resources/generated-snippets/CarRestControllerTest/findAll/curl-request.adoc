@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/api/cars' -i -H 'Accept: application/json;charset=UTF-8' -H 'Authorization: Bearer 123456'
+----

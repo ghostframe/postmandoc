@@ -1,0 +1,8 @@
+./api/people/{id}
+|===
+|Parameter|Description
+
+|`id`
+|The person's id
+
+|===

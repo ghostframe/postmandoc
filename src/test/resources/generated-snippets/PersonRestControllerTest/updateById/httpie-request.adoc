@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+    "name": "Sam",
+    "age": 20
+}
+' | http PUT 'http://localhost:8080/api/people/1' 'Content-Type:application/json;charset=UTF-8' 'Accept:application/json;charset=UTF-8' 'Authorization:Bearer 123456'
+----

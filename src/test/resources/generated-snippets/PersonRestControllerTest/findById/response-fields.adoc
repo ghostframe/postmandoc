@@ -1,0 +1,16 @@
+|===
+|Path|Type|Description
+
+|`id`
+|`Number`
+|The person's id
+
+|`name`
+|`String`
+|The person's name
+
+|`age`
+|`Number`
+|The person's age
+
+|===
