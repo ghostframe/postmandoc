@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import static java.util.Collections.EMPTY_LIST;
 import java.util.List;
+import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
@@ -24,7 +25,7 @@ public class PostmanCollectionFactory {
 
     private static final String HTTP_REQUEST_SNIPPET_FILENAME = "http-request.adoc";
     private static final String COLLECTION_V2_0_0_SCHEMA = "https://schema.getpostman.com/json/collection/v2.0.0/collection.json";
-    private static final String TEST_CLASS_SUFFIX_REGEX = "(Rest|Controller|Tests|Test)";
+    private static final String TEST_CLASS_SUFFIX_REGEX = "(RestController|Controller|Tests|Test)";
 
     @SneakyThrows(value = IOException.class)
     public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
@@ -33,7 +34,7 @@ public class PostmanCollectionFactory {
                         .name(collectionName)
                         .schema(COLLECTION_V2_0_0_SCHEMA)
                         .description("")
-                        ._postman_id("024735d8-3505-b53f-059b-405abeabba24")
+                        ._postman_id(UUID.randomUUID().toString())
                         .build())
                 .item(createFolders(generatedSnippetsFolder.getPath()))
                 .variables(EMPTY_LIST)
@@ -53,9 +54,7 @@ public class PostmanCollectionFactory {
     private static PostmanCollectionItem createFolder(Resource testClassDirectory) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
-        String testClassName = testClassDirectory.getFilename();
-        String entityName = stripTestClassSuffixes(testClassName);
-        postmanCollectionFolder.setName(entityName);
+        postmanCollectionFolder.setName(stripTestClassSuffixes(testClassDirectory.getFilename()));
         Resource[] testCaseDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
