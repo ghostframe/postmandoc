@@ -1,6 +1,6 @@
-package com.pravus.postmandocs;
+package com.pravus.postdocs;
 
-import com.pravus.postmandocs.postman.PostmanCollectionFactory;
+import com.pravus.postdocs.postman.PostmanCollectionFactory;
 import java.io.File;
 import java.io.IOException;
 import static org.assertj.core.api.Java6Assertions.contentOf;
@@ -14,7 +14,7 @@ public class PostmanCollectionFactoryTest {
 
     @Test
     public void fromSnippetsFolder_withSnippetsFolder_generatesExpectedCollection() throws IOException, JSONException {
-        File snippetsFolder = new ClassPathResource("generated-snippets/").getFile();
+        File snippetsFolder = new ClassPathResource("rest-docs-sample-generated-snippets/").getFile();
         String expectedJson = contentOf(new ClassPathResource("rest-docs-sample.postman_collection.json").getFile());
         String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
         System.out.println(collectionJson);

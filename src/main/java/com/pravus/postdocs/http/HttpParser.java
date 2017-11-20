@@ -1,4 +1,4 @@
-package com.pravus.postmandocs.http;
+package com.pravus.postdocs.http;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

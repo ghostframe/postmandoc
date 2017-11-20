@@ -1,4 +1,4 @@
-package com.pravus.postmandocs.postman.domain;
+package com.pravus.postdocs.postman.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
