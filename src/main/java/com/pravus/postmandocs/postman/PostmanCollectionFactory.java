@@ -22,12 +22,16 @@ import org.springframework.util.ResourceUtils;
 
 public class PostmanCollectionFactory {
 
+    private static final String HTTP_REQUEST_SNIPPET_FILENAME = "http-request.adoc";
+    private static final String COLLECTION_V2_SCHEMA = "https://schema.getpostman.com/json/collection/v2.0.0/collection.json";
+    private static final String TEST_CLASS_SUFFIX_REGEX = "(Rest|Controller|Tests|Test)";
+
     @SneakyThrows(value = IOException.class)
     public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
         PostmanCollection postmanCollection = PostmanCollection.builder()
                 .info(PostmanCollectionInfo.builder()
                         .name(collectionName)
-                        .schema("https://schema.getpostman.com/json/collection/v2.0.0/collection.json")
+                        .schema(COLLECTION_V2_SCHEMA)
                         .description("")
                         ._postman_id("024735d8-3505-b53f-059b-405abeabba24")
                         .build())
@@ -50,8 +54,8 @@ public class PostmanCollectionFactory {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
         String testClassName = testClassDirectory.getFilename();
-        String noRestControllerSuffix = testClassName.substring(0, testClassName.length() - "RestControllerTest".length());
-        postmanCollectionFolder.setName(noRestControllerSuffix);
+        String entityName = stripTestClassSuffixes(testClassName);
+        postmanCollectionFolder.setName(entityName);
         Resource[] testCaseDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
@@ -61,13 +65,17 @@ public class PostmanCollectionFactory {
         return postmanCollectionFolder;
     }
 
+    private static String stripTestClassSuffixes(String testClassName) {
+        return testClassName.replaceAll(TEST_CLASS_SUFFIX_REGEX, "");
+    }
+
     @SneakyThrows(value = {HttpException.class, IOException.class})
     public static PostmanCollectionItem createCollectionRequest(Resource testCaseDirectory) {
         PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
         postmanCollectionRequest.setName(testCaseDirectory.getFilename());
         postmanCollectionRequest.setResponse(EMPTY_LIST);
         Resource httpRequestSnippet = new PathMatchingResourcePatternResolver()
-                .getResource(testCaseDirectory.getURL() + "/http-request.adoc");
+                .getResource(testCaseDirectory.getURL() + "/" + HTTP_REQUEST_SNIPPET_FILENAME);
         String httpRequest = FileUtils.readFileToString(httpRequestSnippet.getFile(), StandardCharsets.UTF_8);
         postmanCollectionRequest.setRequest(PostmanRequestFactory.fromHttpRequestSnippet(httpRequest));
         return postmanCollectionRequest;
