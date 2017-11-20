@@ -2,8 +2,10 @@ package com.pravus.postmandocs.postman;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pravus.postmandocs.postman.domain.PostmanCollection;
+import com.pravus.postmandocs.postman.domain.PostmanCollectionFolderItem;
 import com.pravus.postmandocs.postman.domain.PostmanCollectionInfo;
 import com.pravus.postmandocs.postman.domain.PostmanCollectionItem;
+import com.pravus.postmandocs.postman.domain.PostmanCollectionRequestItem;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -45,7 +47,7 @@ public class PostmanCollectionFactory {
 
     @SneakyThrows(value = {IOException.class})
     public static PostmanCollectionItem createCollectionFolder(Resource testClassDirectory) {
-        PostmanCollectionItem postmanCollectionFolder = new PostmanCollectionItem();
+        PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
         String testClassName = testClassDirectory.getFilename();
         String noRestControllerSuffix = testClassName.substring(0, testClassName.length() - "RestControllerTest".length());
@@ -61,7 +63,7 @@ public class PostmanCollectionFactory {
 
     @SneakyThrows(value = {HttpException.class, IOException.class})
     public static PostmanCollectionItem createCollectionRequest(Resource testCaseDirectory) {
-        PostmanCollectionItem postmanCollectionRequest = new PostmanCollectionItem();
+        PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
         postmanCollectionRequest.setName(testCaseDirectory.getFilename());
         postmanCollectionRequest.setResponse(EMPTY_LIST);
         Resource httpRequestSnippet = new PathMatchingResourcePatternResolver()
