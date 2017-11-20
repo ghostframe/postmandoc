@@ -23,7 +23,7 @@ import org.springframework.util.ResourceUtils;
 public class PostmanCollectionFactory {
 
     private static final String HTTP_REQUEST_SNIPPET_FILENAME = "http-request.adoc";
-    private static final String COLLECTION_V2_SCHEMA = "https://schema.getpostman.com/json/collection/v2.0.0/collection.json";
+    private static final String COLLECTION_V2_0_0_SCHEMA = "https://schema.getpostman.com/json/collection/v2.0.0/collection.json";
     private static final String TEST_CLASS_SUFFIX_REGEX = "(Rest|Controller|Tests|Test)";
 
     @SneakyThrows(value = IOException.class)
@@ -31,26 +31,26 @@ public class PostmanCollectionFactory {
         PostmanCollection postmanCollection = PostmanCollection.builder()
                 .info(PostmanCollectionInfo.builder()
                         .name(collectionName)
-                        .schema(COLLECTION_V2_SCHEMA)
+                        .schema(COLLECTION_V2_0_0_SCHEMA)
                         .description("")
                         ._postman_id("024735d8-3505-b53f-059b-405abeabba24")
                         .build())
-                .item(createItems(generatedSnippetsFolder.getPath()))
+                .item(createFolders(generatedSnippetsFolder.getPath()))
                 .variables(EMPTY_LIST)
                 .build();
         return new ObjectMapper().writeValueAsString(postmanCollection);
     }
 
-    public static List<PostmanCollectionItem> createItems(String generatedSnippetsFolderPath) throws IOException {
+    private static List<PostmanCollectionItem> createFolders(String generatedSnippetsFolderPath) throws IOException {
         Resource[] testClassDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(ResourceUtils.FILE_URL_PREFIX + generatedSnippetsFolderPath + "/*");
         return Arrays.stream(testClassDirectories)
-                .map(PostmanCollectionFactory::createCollectionFolder)
+                .map(PostmanCollectionFactory::createFolder)
                 .collect(toList());
     }
 
     @SneakyThrows(value = {IOException.class})
-    public static PostmanCollectionItem createCollectionFolder(Resource testClassDirectory) {
+    private static PostmanCollectionItem createFolder(Resource testClassDirectory) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
         String testClassName = testClassDirectory.getFilename();
@@ -60,7 +60,7 @@ public class PostmanCollectionFactory {
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
                 Arrays.stream(testCaseDirectories)
-                        .map(PostmanCollectionFactory::createCollectionRequest)
+                        .map(PostmanCollectionFactory::createRequest)
                         .collect(toList()));
         return postmanCollectionFolder;
     }
@@ -70,7 +70,7 @@ public class PostmanCollectionFactory {
     }
 
     @SneakyThrows(value = {HttpException.class, IOException.class})
-    public static PostmanCollectionItem createCollectionRequest(Resource testCaseDirectory) {
+    private static PostmanCollectionItem createRequest(Resource testCaseDirectory) {
         PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
         postmanCollectionRequest.setName(testCaseDirectory.getFilename());
         postmanCollectionRequest.setResponse(EMPTY_LIST);
