@@ -17,16 +17,15 @@ public class PostdocsMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project.build.directory}/generated-snippets/")
     private String generatedSnippetsDirectory;
-    @Parameter(defaultValue = "${project.build.directory}/${project.artifactId}.postman_collection.json")
-    private String outputPath;
-    @Parameter(defaultValue = "${project.artifactId}")
+    @Parameter(defaultValue = "${project.build.directory}/${project.name}.postman_collection.json")
+    private File outputFile;
+    @Parameter(defaultValue = "${project.name}")
     private String collectionName;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
         try {
-            File outputFile = new File(outputPath);
-            String collectionJson = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
             FileUtils.write(outputFile, collectionJson, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             throw new MojoFailureException("Couldn't write output file");
@@ -41,11 +40,19 @@ public class PostdocsMojo extends AbstractMojo {
         this.generatedSnippetsDirectory = generatedSnippetsDirectory;
     }
 
-    public String getOutputPath() {
-        return outputPath;
+    public File getOutputFile() {
+        return outputFile;
     }
 
-    public void setOutputPath(String outputPath) {
-        this.outputPath = outputPath;
+    public void setOutputFile(File outputFile) {
+        this.outputFile = outputFile;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 }
