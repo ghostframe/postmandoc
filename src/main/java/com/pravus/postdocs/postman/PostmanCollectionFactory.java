@@ -27,7 +27,7 @@ public class PostmanCollectionFactory {
 
     private static final String HTTP_REQUEST_SNIPPET_FILENAME = "http-request.adoc";
     private static final String COLLECTION_V2_0_0_SCHEMA = "https://schema.getpostman.com/json/collection/v2.0.0/collection.json";
-    private static final String TEST_CLASS_SUFFIX_REGEX = "(RestController|Controller|Tests|Test)";
+    private static final String TEST_CLASS_SUFFIX_REGEX = "(rest|controller|tests|test)";
 
     @SneakyThrows(value = IOException.class)
     public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
@@ -56,7 +56,7 @@ public class PostmanCollectionFactory {
     private static PostmanCollectionItem createFolder(Resource testClassDirectory) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
-        postmanCollectionFolder.setName(camelOrKebabOrSnakeCaseToHumanCase(testClassDirectory.getFilename()));
+        postmanCollectionFolder.setName(testClassNameToFolderName(humanizeCase(testClassDirectory.getFilename())));
         Resource[] testCaseDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
@@ -66,17 +66,14 @@ public class PostmanCollectionFactory {
         return postmanCollectionFolder;
     }
 
-    private static String camelOrKebabOrSnakeCaseToHumanCase(String text) {
-        String dashReplacedWithSpace = text.replace('-', ' ').replace('_', ' ');
-        String capitalized = WordUtils.capitalize(dashReplacedWithSpace);
-        String noSpaces = capitalized.replace(" ", "");
-        return noSpaces.replaceAll(TEST_CLASS_SUFFIX_REGEX, "");
+    private static String testClassNameToFolderName(String text) {
+        return text.replaceAll(TEST_CLASS_SUFFIX_REGEX, "").trim();
     }
 
     @SneakyThrows(value = {HttpException.class, IOException.class})
     private static PostmanCollectionItem createRequest(Resource testCaseDirectory) {
         PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
-        postmanCollectionRequest.setName(camelCaseToHumanCase(testCaseDirectory.getFilename()));
+        postmanCollectionRequest.setName(humanizeCase(testCaseDirectory.getFilename()));
         postmanCollectionRequest.setResponse(EMPTY_LIST);
         Resource httpRequestSnippet = new PathMatchingResourcePatternResolver()
                 .getResource(testCaseDirectory.getURL() + "/" + HTTP_REQUEST_SNIPPET_FILENAME);
@@ -85,7 +82,10 @@ public class PostmanCollectionFactory {
         return postmanCollectionRequest;
     }
 
-    private static String camelCaseToHumanCase(String text) {
-        return StringUtils.capitalize(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(text), " ").toLowerCase());
+    private static String humanizeCase(String text) {
+        String dashReplacedWithSpace = text.replace('-', ' ').replace('_', ' ');
+        String capitalized = WordUtils.capitalize(dashReplacedWithSpace);
+        String camelCase = capitalized.replace(" ", "");
+        return StringUtils.capitalize(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(camelCase), " ").toLowerCase());
     }
 }
