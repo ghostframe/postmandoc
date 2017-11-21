@@ -1,6 +1,6 @@
-package com.pravus.postmandoctor;
+package com.pravus.postmandoc;
 
-import com.pravus.postmandoctor.postman.PostmanCollectionFactory;
+import com.pravus.postmandoc.postman.PostmanCollectionFactory;
 import java.io.File;
 import java.io.IOException;
 import static org.assertj.core.api.Java6Assertions.contentOf;

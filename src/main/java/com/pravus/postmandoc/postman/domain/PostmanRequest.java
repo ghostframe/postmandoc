@@ -1,4 +1,4 @@
-package com.pravus.postmandoctor.postman.domain;
+package com.pravus.postmandoc.postman.domain;
 
 import java.util.List;
 import lombok.Builder;
