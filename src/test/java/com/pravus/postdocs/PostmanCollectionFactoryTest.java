@@ -35,4 +35,12 @@ public class PostmanCollectionFactoryTest {
         String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
         JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
     }
+
+    @Test
+    public void fromSnippetsFolder_withSubfolderPerTestCaseInCamelCase_generatesExpectedCollection() throws IOException, JSONException {
+        File snippetsFolder = new ClassPathResource("folder-per-test-case/generated-snippets-camel-case/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-case/postman_collection.json").getFile());
+        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
+        JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
+    }
 }

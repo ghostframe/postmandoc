@@ -1,0 +1,8 @@
+[source,http,options="nowrap"]
+----
+GET /api/people/1 HTTP/1.1
+Accept: application/json;charset=UTF-8
+Authorization: Bearer 123456
+Host: localhost:8080
+
+----
