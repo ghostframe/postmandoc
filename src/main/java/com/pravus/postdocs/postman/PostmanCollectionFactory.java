@@ -16,6 +16,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.WordUtils;
 import org.apache.http.HttpException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -54,7 +55,7 @@ public class PostmanCollectionFactory {
     private static PostmanCollectionItem createFolder(Resource testClassDirectory) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
-        postmanCollectionFolder.setName(stripTestClassSuffixes(testClassDirectory.getFilename()));
+        postmanCollectionFolder.setName(testClassNameToFolderName(testClassDirectory.getFilename()));
         Resource[] testCaseDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
@@ -64,8 +65,11 @@ public class PostmanCollectionFactory {
         return postmanCollectionFolder;
     }
 
-    private static String stripTestClassSuffixes(String testClassName) {
-        return testClassName.replaceAll(TEST_CLASS_SUFFIX_REGEX, "");
+    private static String testClassNameToFolderName(String testClassName) {
+        String dashReplacedWithSpace = testClassName.replace('-', ' ').replace('_', ' ');
+        String capitalized = WordUtils.capitalize(dashReplacedWithSpace);
+        String noSpaces = capitalized.replace(" ", "");
+        return noSpaces.replaceAll(TEST_CLASS_SUFFIX_REGEX, "");
     }
 
     @SneakyThrows(value = {HttpException.class, IOException.class})

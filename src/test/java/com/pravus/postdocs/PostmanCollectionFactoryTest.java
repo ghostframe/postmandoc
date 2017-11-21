@@ -13,9 +13,27 @@ import org.springframework.core.io.ClassPathResource;
 public class PostmanCollectionFactoryTest {
 
     @Test
-    public void fromSnippetsFolder_withSnippetsFolder_generatesExpectedCollection() throws IOException, JSONException {
-        File snippetsFolder = new ClassPathResource("folder-per-test-class-example/generated-snippets/").getFile();
-        String expectedJson = contentOf(new ClassPathResource("folder-per-test-class-example/postman_collection.json").getFile());
+    public void fromSnippetsFolder_withSubfolderPerTestClassAndSubfolderPerTestCaseInCamelCase_generatesExpectedCollection() throws IOException, JSONException {
+        File snippetsFolder = new ClassPathResource("folder-per-test-class/generated-snippets-camel-case/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-class/postman_collection.json").getFile());
+        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
+        System.out.println(collectionJson);
+        JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
+    }
+
+    @Test
+    public void fromSnippetsFolder_withSubfolderPerTestClassAndSubfolderPerTestCaseInKebabCase_generatesExpectedCollection() throws IOException, JSONException {
+        File snippetsFolder = new ClassPathResource("folder-per-test-class/generated-snippets-kebab-case/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-class/postman_collection.json").getFile());
+        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
+        System.out.println(collectionJson);
+        JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
+    }
+
+    @Test
+    public void fromSnippetsFolder_withSubfolderPerTestClassAndSubfolderPerTestCaseInSnakeCase_generatesExpectedCollection() throws IOException, JSONException {
+        File snippetsFolder = new ClassPathResource("folder-per-test-class/generated-snippets-snake-case/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-class/postman_collection.json").getFile());
         String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
         System.out.println(collectionJson);
         JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
