@@ -1,6 +1,6 @@
-package com.pravus.postdocs;
+package com.pravus.postmandoctor;
 
-import com.pravus.postdocs.postman.PostmanCollectionFactory;
+import com.pravus.postmandoctor.postman.PostmanCollectionFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +13,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
-public class PostdocsMojo extends AbstractMojo {
+public class PostmandoctorMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project.build.directory}/generated-snippets/")
     private String generatedSnippetsDirectory;

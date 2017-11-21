@@ -1,11 +1,11 @@
-package com.pravus.postdocs.postman;
+package com.pravus.postmandoctor.postman;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pravus.postdocs.postman.domain.PostmanCollection;
-import com.pravus.postdocs.postman.domain.PostmanCollectionFolderItem;
-import com.pravus.postdocs.postman.domain.PostmanCollectionInfo;
-import com.pravus.postdocs.postman.domain.PostmanCollectionItem;
-import com.pravus.postdocs.postman.domain.PostmanCollectionRequestItem;
+import com.pravus.postmandoctor.postman.domain.PostmanCollection;
+import com.pravus.postmandoctor.postman.domain.PostmanCollectionFolderItem;
+import com.pravus.postmandoctor.postman.domain.PostmanCollectionInfo;
+import com.pravus.postmandoctor.postman.domain.PostmanCollectionItem;
+import com.pravus.postmandoctor.postman.domain.PostmanCollectionRequestItem;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
