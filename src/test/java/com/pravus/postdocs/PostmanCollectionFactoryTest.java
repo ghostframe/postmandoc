@@ -14,8 +14,8 @@ public class PostmanCollectionFactoryTest {
 
     @Test
     public void fromSnippetsFolder_withSnippetsFolder_generatesExpectedCollection() throws IOException, JSONException {
-        File snippetsFolder = new ClassPathResource("rest-docs-sample-generated-snippets/").getFile();
-        String expectedJson = contentOf(new ClassPathResource("rest-docs-sample.postman_collection.json").getFile());
+        File snippetsFolder = new ClassPathResource("folder-per-test-class-example/generated-snippets/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-class-example/postman_collection.json").getFile());
         String collectionJson = PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder);
         System.out.println(collectionJson);
         JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
