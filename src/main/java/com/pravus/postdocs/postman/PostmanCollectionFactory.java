@@ -16,6 +16,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.apache.http.HttpException;
 import org.springframework.core.io.Resource;
@@ -55,7 +56,7 @@ public class PostmanCollectionFactory {
     private static PostmanCollectionItem createFolder(Resource testClassDirectory) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
         postmanCollectionFolder.setDescription("");
-        postmanCollectionFolder.setName(testClassNameToFolderName(testClassDirectory.getFilename()));
+        postmanCollectionFolder.setName(camelOrKebabOrSnakeCaseToHumanCase(testClassDirectory.getFilename()));
         Resource[] testCaseDirectories = new PathMatchingResourcePatternResolver()
                 .getResources(testClassDirectory.getURL() + "/*");
         postmanCollectionFolder.setItem(
@@ -65,8 +66,8 @@ public class PostmanCollectionFactory {
         return postmanCollectionFolder;
     }
 
-    private static String testClassNameToFolderName(String testClassName) {
-        String dashReplacedWithSpace = testClassName.replace('-', ' ').replace('_', ' ');
+    private static String camelOrKebabOrSnakeCaseToHumanCase(String text) {
+        String dashReplacedWithSpace = text.replace('-', ' ').replace('_', ' ');
         String capitalized = WordUtils.capitalize(dashReplacedWithSpace);
         String noSpaces = capitalized.replace(" ", "");
         return noSpaces.replaceAll(TEST_CLASS_SUFFIX_REGEX, "");
@@ -75,13 +76,16 @@ public class PostmanCollectionFactory {
     @SneakyThrows(value = {HttpException.class, IOException.class})
     private static PostmanCollectionItem createRequest(Resource testCaseDirectory) {
         PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
-        postmanCollectionRequest.setName(testCaseDirectory.getFilename());
+        postmanCollectionRequest.setName(camelCaseToHumanCase(testCaseDirectory.getFilename()));
         postmanCollectionRequest.setResponse(EMPTY_LIST);
         Resource httpRequestSnippet = new PathMatchingResourcePatternResolver()
                 .getResource(testCaseDirectory.getURL() + "/" + HTTP_REQUEST_SNIPPET_FILENAME);
         String httpRequest = FileUtils.readFileToString(httpRequestSnippet.getFile(), StandardCharsets.UTF_8);
         postmanCollectionRequest.setRequest(PostmanRequestFactory.fromHttpRequestSnippet(httpRequest));
         return postmanCollectionRequest;
+    }
 
+    private static String camelCaseToHumanCase(String text) {
+        return StringUtils.capitalize(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(text), " ").toLowerCase());
     }
 }

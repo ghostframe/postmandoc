@@ -11,7 +11,7 @@
 			"description": "",
 			"item": [
 				{
-					"name": "findById",
+					"name": "Find by id",
 					"request": {
 						"url": "http://localhost:8080/api/people/1",
 						"method": "GET",
@@ -36,7 +36,7 @@
 					"response": []
 				},
 				{
-					"name": "findAll",
+					"name": "Find all",
 					"request": {
 						"url": "http://localhost:8080/api/people",
 						"method": "GET",
@@ -61,7 +61,7 @@
 					"response": []
 				},
 				{
-					"name": "create",
+					"name": "Create",
 					"request": {
 						"url": "http://localhost:8080/api/people",
 						"method": "POST",
@@ -91,7 +91,7 @@
 					"response": []
 				},
 				{
-					"name": "updateById",
+					"name": "Update by id",
 					"request": {
 						"url": "http://localhost:8080/api/people/1",
 						"method": "PUT",
@@ -121,7 +121,7 @@
 					"response": []
 				},
 				{
-					"name": "patchById",
+					"name": "Patch by id",
 					"request": {
 						"url": "http://localhost:8080/api/people/1",
 						"method": "PATCH",
@@ -151,7 +151,7 @@
 					"response": []
 				},
 				{
-					"name": "deleteById",
+					"name": "Delete by id",
 					"request": {
 						"url": "http://localhost:8080/api/people/1",
 						"method": "DELETE",
@@ -182,7 +182,7 @@
 			"description": "",
 			"item": [
 				{
-					"name": "findAll",
+					"name": "Find all",
 					"request": {
 						"url": "http://localhost:8080/api/cars",
 						"method": "GET",

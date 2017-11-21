@@ -39,4 +39,8 @@ public class PostmanCollectionFactoryTest {
         JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
     }
 
+    @Test
+    public void sad() {
+    }
+
 }
