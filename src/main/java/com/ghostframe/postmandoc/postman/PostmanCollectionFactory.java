@@ -31,7 +31,7 @@ public class PostmanCollectionFactory {
     private static final String TEST_CLASS_SUFFIX_REGEX = "(rest|controller|tests|test)";
     private static final ResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();
 
-    @SneakyThrows(value = IOException.class)
+    @SneakyThrows(IOException.class)
     public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
         PostmanCollection postmanCollection = PostmanCollection.builder()
                 .info(PostmanCollectionInfo.builder()
@@ -82,7 +82,7 @@ public class PostmanCollectionFactory {
         return text.replaceAll(TEST_CLASS_SUFFIX_REGEX, "").trim();
     }
 
-    @SneakyThrows(value = {HttpException.class, IOException.class})
+    @SneakyThrows({HttpException.class, IOException.class})
     private static PostmanCollectionItem createRequest(String name, Resource httpRequestSnippet) {
         PostmanCollectionRequestItem postmanCollectionRequest = new PostmanCollectionRequestItem();
         postmanCollectionRequest.setName(humanizeCase(name));
