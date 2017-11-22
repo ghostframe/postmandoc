@@ -1,6 +1,6 @@
-package com.pravus.postmandoc;
+package com.ghostframe.postmandoc;
 
-import com.pravus.postmandoc.postman.PostmanCollectionFactory;
+import com.ghostframe.postmandoc.postman.PostmanCollectionFactory;
 import java.io.File;
 import java.io.IOException;
 import static org.assertj.core.api.Java6Assertions.contentOf;

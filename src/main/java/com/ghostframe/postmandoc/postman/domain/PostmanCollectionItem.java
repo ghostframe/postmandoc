@@ -1,4 +1,4 @@
-package com.pravus.postmandoc.postman.domain;
+package com.ghostframe.postmandoc.postman.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

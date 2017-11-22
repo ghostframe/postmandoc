@@ -1,4 +1,4 @@
-package com.pravus.postmandoc.http;
+package com.ghostframe.postmandoc.http;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

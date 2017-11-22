@@ -1,9 +1,9 @@
-package com.pravus.postmandoc.postman;
+package com.ghostframe.postmandoc.postman;
 
-import com.pravus.postmandoc.http.HttpParser;
-import com.pravus.postmandoc.postman.domain.PostmanHeader;
-import com.pravus.postmandoc.postman.domain.PostmanRequest;
-import com.pravus.postmandoc.postman.domain.PostmanRequestBody;
+import com.ghostframe.postmandoc.http.HttpParser;
+import com.ghostframe.postmandoc.postman.domain.PostmanHeader;
+import com.ghostframe.postmandoc.postman.domain.PostmanRequest;
+import com.ghostframe.postmandoc.postman.domain.PostmanRequestBody;
 import java.io.IOException;
 import static java.util.Arrays.asList;
 import java.util.List;
