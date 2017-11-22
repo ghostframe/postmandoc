@@ -40,14 +40,14 @@ public class PostmanCollectionFactory {
                         .description("")
                         ._postman_id(UUID.randomUUID().toString())
                         .build())
-                .item(scanGeneratedSnippetsFolder(generatedSnippetsFolder.getPath()))
+                .item(scanGeneratedSnippetsFolder(generatedSnippetsFolder))
                 .variables(EMPTY_LIST)
                 .build();
         return new ObjectMapper().writeValueAsString(postmanCollection);
     }
 
-    private static List<PostmanCollectionItem> scanGeneratedSnippetsFolder(String generatedSnippetsFolderPath) throws IOException {
-        Resource[] subfolders = resourceLoader.getResources(ResourceUtils.FILE_URL_PREFIX + generatedSnippetsFolderPath + "/*");
+    private static List<PostmanCollectionItem> scanGeneratedSnippetsFolder(File generatedSnippetsFolderPath) throws IOException {
+        Resource[] subfolders = resourceLoader.getResources(ResourceUtils.FILE_URL_PREFIX + generatedSnippetsFolderPath.getPath() + "/*");
         return Arrays.stream(subfolders)
                 .map(PostmanCollectionFactory::folderToCollectionItem)
                 .collect(toList());
