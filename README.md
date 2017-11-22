@@ -3,15 +3,7 @@ A Maven plugin that generates a Postman collection for all requests documented w
 
 ## Usage
 
-1. Add jitpack.io to your project's maven repositories:
-```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
+1. Clone this repository and run the `install` maven goal.
 2. Add postmandoc as a build plugin and configure the `postmandoc:generate` goal:
 ```xml
 <build>
