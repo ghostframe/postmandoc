@@ -30,6 +30,7 @@ public class PostmandocMojo extends AbstractMojo {
         } catch (IOException ex) {
             throw new MojoFailureException("Couldn't write output file");
         }
+        getLog().info("Generated Postman collection: " + outputFile);
     }
 
     public String getGeneratedSnippetsDirectory() {
