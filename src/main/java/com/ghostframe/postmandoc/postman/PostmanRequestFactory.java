@@ -21,7 +21,6 @@ public class PostmanRequestFactory {
     private static final String HTTP_URL_PREFIX = "http://";
     private static final String HTTP_REQUEST_BODY_START_TOKEN = "\n\r\n";
     private static final List<String> IGNORED_HTTP_HEADER_NAMES = asList(HttpHeaders.HOST, HttpHeaders.CONTENT_LENGTH);
-    private static final String DEFAULT_DESCRIPTION = "";
 
     public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet) throws IOException, HttpException {
         String httpRequestText = stripAdocHeaderAndPayload(httpRequestSnippet);
@@ -31,7 +30,6 @@ public class PostmanRequestFactory {
                 .url(getUrl(httpRequest))
                 .method(httpRequest.getRequestLine().getMethod())
                 .header(createHeaders(httpRequest))
-                .description(DEFAULT_DESCRIPTION)
                 .build();
     }
 
@@ -55,7 +53,7 @@ public class PostmanRequestFactory {
     private static List<PostmanHeader> createHeaders(HttpRequest httpRequest) {
         return Stream.of(httpRequest.getAllHeaders())
                 .filter(header -> !IGNORED_HTTP_HEADER_NAMES.contains(header.getName()))
-                .map(header -> new PostmanHeader(header.getName(), header.getValue(), DEFAULT_DESCRIPTION))
+                .map(header -> new PostmanHeader(header.getName(), header.getValue(), null))
                 .collect(toList());
     }
 

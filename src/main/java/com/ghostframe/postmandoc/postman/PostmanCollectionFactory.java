@@ -33,7 +33,6 @@ public class PostmanCollectionFactory {
                 .info(PostmanCollectionInfo.builder()
                         .name(collectionName)
                         .schema(COLLECTION_V2_0_0_SCHEMA)
-                        .description("")
                         ._postman_id(UUID.randomUUID().toString())
                         .build())
                 .item(scanGeneratedSnippetsFolder(generatedSnippetsFolder))
@@ -63,7 +62,6 @@ public class PostmanCollectionFactory {
 
     private static PostmanCollectionFolderItem createFolder(File folder) {
         PostmanCollectionFolderItem postmanCollectionFolder = new PostmanCollectionFolderItem();
-        postmanCollectionFolder.setDescription("");
         postmanCollectionFolder.setName(testClassNameToFolderName(humanizeCase(folder.getName())));
         return postmanCollectionFolder;
     }

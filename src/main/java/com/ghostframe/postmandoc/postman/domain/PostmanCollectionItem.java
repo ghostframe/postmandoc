@@ -9,6 +9,5 @@ import lombok.Data;
 public class PostmanCollectionItem {
 
     private String name;
-    private String description;
 
 }

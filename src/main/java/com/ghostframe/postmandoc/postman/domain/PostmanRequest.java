@@ -12,6 +12,5 @@ public class PostmanRequest {
     private String method;
     private List<PostmanHeader> header;
     private PostmanRequestBody body;
-    private String description;
 
 }

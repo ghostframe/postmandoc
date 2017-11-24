@@ -2,13 +2,11 @@
 	"variables": [],
 	"info": {
 		"name": "rest-docs-sample",
-		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Person",
-			"description": "",
 			"item": [
 				{
 					"name": "Find by id",
@@ -18,20 +16,17 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -43,20 +38,17 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -68,25 +60,21 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -98,25 +86,21 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -128,25 +112,21 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -158,20 +138,17 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -179,7 +156,6 @@
 		},
 		{
 			"name": "Car",
-			"description": "",
 			"item": [
 				{
 					"name": "Find all",
@@ -189,20 +165,17 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
+								"value": "application/json;charset=UTF-8"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 123456",
-								"description": ""
+								"value": "Bearer 123456"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
