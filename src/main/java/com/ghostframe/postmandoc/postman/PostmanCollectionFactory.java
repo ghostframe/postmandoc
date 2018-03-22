@@ -28,7 +28,7 @@ public class PostmanCollectionFactory {
     private static final String TEST_CLASS_SUFFIX_REGEX = "(rest|controller|tests|test)";
 
     @SneakyThrows(IOException.class)
-    public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
+    public static String fromSnippetsFolder(String collectionName, String hostReplacement, File generatedSnippetsFolder) {
         PostmanCollection postmanCollection = PostmanCollection.builder()
                 .info(PostmanCollectionInfo.builder()
                         .name(collectionName)

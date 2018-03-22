@@ -21,10 +21,12 @@ public class PostmandocMojo extends AbstractMojo {
     private File outputFile;
     @Parameter(defaultValue = "${project.name}")
     private String collectionName;
+    @Parameter
+    private String hostReplacement;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
+        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder(collectionName, hostReplacement, new File(generatedSnippetsDirectory));
         try {
             FileUtils.write(outputFile, collectionJson, StandardCharsets.UTF_8);
         } catch (IOException ex) {
