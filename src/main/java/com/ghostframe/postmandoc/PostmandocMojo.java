@@ -1,6 +1,9 @@
 package com.ghostframe.postmandoc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ghostframe.postmandoc.postman.PostmanCollectionFactory;
+import com.ghostframe.postmandoc.postman.domain.PostmanCollection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -24,13 +27,18 @@ public class PostmandocMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        String collectionJson = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
         try {
+            PostmanCollection postmanCollection = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
+            String collectionJson = writeAsJson(postmanCollection);
             FileUtils.write(outputFile, collectionJson, StandardCharsets.UTF_8);
+            getLog().info("Generated Postman collection: " + outputFile);
         } catch (IOException ex) {
-            throw new MojoFailureException("Couldn't write output file");
+            getLog().error(ex);
         }
-        getLog().info("Generated Postman collection: " + outputFile);
+    }
+
+    private String writeAsJson(Object object) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(object);
     }
 
     public String getGeneratedSnippetsDirectory() {

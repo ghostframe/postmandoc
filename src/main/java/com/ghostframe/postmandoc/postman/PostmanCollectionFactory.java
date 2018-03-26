@@ -1,6 +1,5 @@
 package com.ghostframe.postmandoc.postman;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ghostframe.postmandoc.postman.domain.PostmanCollection;
 import com.ghostframe.postmandoc.postman.domain.PostmanCollectionFolderItem;
 import com.ghostframe.postmandoc.postman.domain.PostmanCollectionInfo;
@@ -28,8 +27,8 @@ public class PostmanCollectionFactory {
     private static final String TEST_CLASS_SUFFIX_REGEX = "(rest|controller|tests|test)";
 
     @SneakyThrows(IOException.class)
-    public static String fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
-        PostmanCollection postmanCollection = PostmanCollection.builder()
+    public static PostmanCollection fromSnippetsFolder(String collectionName, File generatedSnippetsFolder) {
+        return PostmanCollection.builder()
                 .info(PostmanCollectionInfo.builder()
                         .name(collectionName)
                         .schema(COLLECTION_V2_0_0_SCHEMA)
@@ -38,7 +37,6 @@ public class PostmanCollectionFactory {
                 .item(scanGeneratedSnippetsFolder(generatedSnippetsFolder))
                 .variables(EMPTY_LIST)
                 .build();
-        return new ObjectMapper().writeValueAsString(postmanCollection);
     }
 
     private static List<PostmanCollectionItem> scanGeneratedSnippetsFolder(File generatedSnippetsFolder) throws IOException {
