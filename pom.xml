@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ghostframe</groupId>
     <artifactId>postmandoc-maven-plugin</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>maven-plugin</packaging>
     <dependencyManagement>
         <dependencies>
@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <github.maven.repository>file:///${project.build.directory}/maven-repository/</github.maven.repository>
+        <github.maven.repository>file:///maven-repository/</github.maven.repository>
     </properties>
     <dependencies>
         <dependency>

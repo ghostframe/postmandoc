@@ -22,12 +22,12 @@ public class PostmanRequestFactory {
     private static final String HTTP_REQUEST_BODY_START_TOKEN = "\n\r\n";
     private static final List<String> IGNORED_HTTP_HEADER_NAMES = asList(HttpHeaders.HOST, HttpHeaders.CONTENT_LENGTH);
 
-    public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet) throws IOException, HttpException {
+    public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet, String replacementHost) throws IOException, HttpException {
         String httpRequestText = stripAdocHeaderAndPayload(httpRequestSnippet);
         HttpRequest httpRequest = HttpParser.parse(httpRequestText);
         return PostmanRequest.builder()
                 .body(createBody(httpRequestText))
-                .url(getUrl(httpRequest))
+                .url(getUrl(httpRequest, replacementHost))
                 .method(httpRequest.getRequestLine().getMethod())
                 .header(createHeaders(httpRequest))
                 .build();
@@ -39,8 +39,9 @@ public class PostmanRequestFactory {
         return noHeaderAndNoPayload;
     }
 
-    private static String getUrl(HttpRequest httpRequest) {
-        return HTTP_URL_PREFIX + httpRequest.getFirstHeader(HttpHeaders.HOST).getValue() + httpRequest.getRequestLine().getUri();
+    private static String getUrl(HttpRequest httpRequest, String replacementHost) {
+        String host = replacementHost != null ? replacementHost : httpRequest.getFirstHeader(HttpHeaders.HOST).getValue();
+        return HTTP_URL_PREFIX + host + httpRequest.getRequestLine().getUri();
     }
 
     private static PostmanRequestBody createBody(String httpRequestText) {

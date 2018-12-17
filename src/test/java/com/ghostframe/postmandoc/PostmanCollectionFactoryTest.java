@@ -49,6 +49,15 @@ public class PostmanCollectionFactoryTest {
         JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
     }
 
+    @Test
+    @SneakyThrows
+    public void fromSnippetsFolder_withReplaceUrlParameters_generatesExpectedCollection() {
+        File snippetsFolder = new ClassPathResource("folder-per-test-case/generated-snippets-camel-case/").getFile();
+        String expectedJson = contentOf(new ClassPathResource("folder-per-test-case/postman_collection_with_replaced_host.json").getFile());
+        String collectionJson = writeAsJson(PostmanCollectionFactory.fromSnippetsFolder("rest-docs-sample", snippetsFolder, "{{host}}"));
+        JSONAssert.assertEquals(expectedJson, collectionJson, JSONCompareMode.LENIENT);
+    }
+
     private String writeAsJson(Object object) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(object);
     }

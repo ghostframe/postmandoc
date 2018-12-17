@@ -20,6 +20,8 @@ public class PostmandocMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project.build.directory}/generated-snippets/")
     private String generatedSnippetsDirectory;
+    @Parameter
+    private String replacementHost;
     @Parameter(defaultValue = "${project.build.directory}/${project.name}.postman_collection.json")
     private File outputFile;
     @Parameter(defaultValue = "${project.name}")
@@ -28,7 +30,7 @@ public class PostmandocMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            PostmanCollection postmanCollection = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory));
+            PostmanCollection postmanCollection = PostmanCollectionFactory.fromSnippetsFolder(collectionName, new File(generatedSnippetsDirectory), replacementHost);
             String collectionJson = writeAsJson(postmanCollection);
             FileUtils.write(outputFile, collectionJson, StandardCharsets.UTF_8);
             getLog().info("Generated Postman collection: " + outputFile);
