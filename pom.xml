@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <github.maven.repository>file:///maven-repository/</github.maven.repository>
+        <github.maven.repository>file:///${project.basedir}/maven-repository/</github.maven.repository>
     </properties>
     <dependencies>
         <dependency>
