@@ -3,7 +3,15 @@ A Maven plugin that generates a Postman collection for all requests documented w
 
 ## Usage
 
-1. Clone this repository and run the `install` maven goal.
+1. Add this repo's maven repository to your project:
+```xml
+    <pluginRepositories>
+        <pluginRepository>
+            <id>postmandoc-maven-repository</id>
+            <url>https://raw.githubusercontent.com/ghostframe/postmandoc/master/maven-repository/</url>
+        </pluginRepository>
+    </pluginRepositories>
+```
 2. Add postmandoc as a build plugin and configure the `postmandoc:generate` goal:
 ```xml
 <build>
@@ -11,7 +19,7 @@ A Maven plugin that generates a Postman collection for all requests documented w
         <plugin>
             <groupId>com.ghostframe</groupId>
             <artifactId>postmandoc-maven-plugin</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
             <executions>
                 <execution>
                     <goals>
