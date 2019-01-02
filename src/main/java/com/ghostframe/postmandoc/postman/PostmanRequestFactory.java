@@ -19,7 +19,7 @@ public class PostmanRequestFactory {
     private static final String ADOC_HEADER = "[source,http,options=\"nowrap\"]\n----\n";
     private static final String ADOC_PAYLOAD = "\n----";
     private static final String HTTP_URL_PREFIX = "http://";
-    private static final String HTTP_REQUEST_BODY_START_TOKEN = "\n\r\n";
+    private static final String HTTP_REQUEST_BODY_START_TOKEN = System.getProperty("line.separator");
     private static final List<String> IGNORED_HTTP_HEADER_NAMES = asList(HttpHeaders.HOST, HttpHeaders.CONTENT_LENGTH);
 
     public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet, String replacementHost) throws IOException, HttpException {
