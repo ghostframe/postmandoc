@@ -1,0 +1,40 @@
+{
+    "variables": [],
+    "info": {
+        "name": "rest-docs-sample",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Person",
+            "item": [
+                {
+                    "name": "Create",
+                    "request": {
+                        "url": "http://localhost:8080/api/people",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json;charset=UTF-8"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer 123456"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json;charset=UTF-8"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Sam\",\n    \"age\": 20\n}\n"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

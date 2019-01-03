@@ -19,7 +19,8 @@ public class PostmanRequestFactory {
     private static final String ADOC_HEADER = "[source,http,options=\"nowrap\"]\n----\n";
     private static final String ADOC_PAYLOAD = "\n----";
     private static final String HTTP_URL_PREFIX = "http://";
-    private static final String HTTP_REQUEST_BODY_START_TOKEN = System.getProperty("line.separator");
+    private static final String HTTP_REQUEST_BODY_START_TOKEN_WIN = "\n\r\n";
+    private static final String HTTP_REQUEST_BODY_START_TOKEN_LINUX = "\n\n";
     private static final List<String> IGNORED_HTTP_HEADER_NAMES = asList(HttpHeaders.HOST, HttpHeaders.CONTENT_LENGTH);
 
     public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet, String replacementHost) throws IOException, HttpException {
@@ -47,8 +48,16 @@ public class PostmanRequestFactory {
     private static PostmanRequestBody createBody(String httpRequestText) {
         return PostmanRequestBody.builder()
                 .mode("raw")
-                .raw(StringUtils.substringAfter(httpRequestText, HTTP_REQUEST_BODY_START_TOKEN))
+                .raw(StringUtils.substringAfter(httpRequestText, getBodyStartToken(httpRequestText)))
                 .build();
+    }
+
+    private static String getBodyStartToken(String httpRequestText) {
+        if (httpRequestText.contains(HTTP_REQUEST_BODY_START_TOKEN_WIN)) {
+            return HTTP_REQUEST_BODY_START_TOKEN_WIN;
+        } else {
+            return HTTP_REQUEST_BODY_START_TOKEN_LINUX;
+        }
     }
 
     private static List<PostmanHeader> createHeaders(HttpRequest httpRequest) {
