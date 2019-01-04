@@ -29,7 +29,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"Sam\",\n    \"age\": 20\n}\n"
+                            "raw": "{\r\n    \"name\": \"Sam\",\r\n    \"age\": 20\r\n}\r\n"
                         }
                     },
                     "response": []

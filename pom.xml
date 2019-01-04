@@ -6,7 +6,7 @@
     <groupId>com.ghostframe</groupId>
     <artifactId>postmandoc-maven-plugin</artifactId>
     <url>https://github.com/ghostframe/postmandoc</url>
-    <version>1.1.1</version>
+    <version>1.1.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

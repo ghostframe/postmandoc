@@ -22,15 +22,15 @@ public class PostmanRequestFactory {
     private static final String ADOC_HEADER = "[source,http,options=\"nowrap\"]\n----\n";
     private static final String ADOC_PAYLOAD = "\n----";
     private static final String HTTP_URL_PREFIX = "http://";
-    private static final String HTTP_REQUEST_BODY_START_TOKEN_WIN = "\n\r\n";
-    private static final String HTTP_REQUEST_BODY_START_TOKEN_LINUX = "\n\n";
+    private static final String BLANK_LINE_WIN = "\n\r\n";
+    private static final String BLANK_LINE_LINUX = "\n\n";
     private static final List<String> IGNORED_HTTP_HEADER_NAMES = asList(HttpHeaders.HOST, HttpHeaders.CONTENT_LENGTH);
 
     public static PostmanRequest fromHttpRequestSnippet(String httpRequestSnippet, String replacementHost) throws IOException, HttpException {
         String httpRequestText = stripAdocHeaderAndPayload(httpRequestSnippet);
         HttpRequest httpRequest = HttpParser.parse(httpRequestText);
         return PostmanRequest.builder()
-                .body(createBody(httpRequestText))
+                .body(createPostmanRequestBody(httpRequestText))
                 .url(getUrl(httpRequest, replacementHost))
                 .method(httpRequest.getRequestLine().getMethod())
                 .header(createHeaders(httpRequest))
@@ -48,18 +48,30 @@ public class PostmanRequestFactory {
         return HTTP_URL_PREFIX + host + httpRequest.getRequestLine().getUri();
     }
 
-    private static PostmanRequestBody createBody(String httpRequestText) {
+    private static PostmanRequestBody createPostmanRequestBody(String httpRequestText) {
         return PostmanRequestBody.builder()
                 .mode("raw")
-                .raw(StringUtils.substringAfter(httpRequestText, getBodyStartToken(httpRequestText)))
+                .raw(extractBody(httpRequestText))
                 .build();
     }
 
-    private static String getBodyStartToken(String httpRequestText) {
-        if (httpRequestText.contains(HTTP_REQUEST_BODY_START_TOKEN_WIN)) {
-            return HTTP_REQUEST_BODY_START_TOKEN_WIN;
+    private static String extractBody(String httpRequestText) {
+        if (hasLinuxEndOfLine(httpRequestText)) {
+            return convertEolToWindows(StringUtils.substringAfter(httpRequestText, BLANK_LINE_LINUX));
         } else {
-            return HTTP_REQUEST_BODY_START_TOKEN_LINUX;
+            return StringUtils.substringAfter(httpRequestText, BLANK_LINE_WIN);
+        }
+    }
+
+    private static boolean hasLinuxEndOfLine(String string) {
+        return !string.contains(BLANK_LINE_WIN);
+    }
+
+    private static String convertEolToWindows(String entrada) {
+        if (!entrada.contains(BLANK_LINE_WIN)) {
+            return entrada.replaceAll("\\n", "\r\n");
+        } else {
+            return entrada;
         }
     }
 
